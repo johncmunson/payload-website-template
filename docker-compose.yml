@@ -2,14 +2,19 @@ version: '3'
 
 services:
   payload:
-    image: node:18-alpine
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
     ports:
       - '3000:3000'
     volumes:
       - .:/home/node/app
-      - node_modules:/home/node/app/node_modules
+      # The volume below came with the create-payload-app command, but it is commented out.
+      # Mounting node_modules as a volume can cause permission issues with pnpm and Dev Containers.
+      # It's safer to let the container manage its own node_modules internally.
+      # - node_modules:/home/node/app/node_modules
     working_dir: /home/node/app/
-    command: sh -c "yarn install && yarn dev"
+    command: sh -c "corepack enable && pnpm install && tail -f /dev/null"
     depends_on:
       - mongo
     env_file:
@@ -28,4 +33,5 @@ services:
 
 volumes:
   data:
-  node_modules:
+  # See above comment about node_modules.
+  # node_modules:
