@@ -89,4 +89,7 @@ export default buildConfig({
     },
     tasks: [],
   },
+  graphQL: {
+    disable: true,
+  },
 })
