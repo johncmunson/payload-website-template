@@ -1,5 +1,5 @@
 {
-  "name": "Payload Dev Container",
+  "name": "Payload Dev Container (Website Template)",
   "dockerComposeFile": "../docker-compose.yml",
   "service": "payload",
   "workspaceFolder": "/home/node/app",
